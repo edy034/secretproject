@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Number</h1>
+  <p>Guess a number between 1 and 100:</p>
+  <input type="number" id="guessInput">
+  <button onclick="checkGuess()">Submit</button>
+  <p id="message"></p>
+
+  <script>
+    // Generate a random number between 1 and 100
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const guessInput = document.getElementById("guessInput");
+      const guess = parseInt(guessInput.value);
+      attempts++;
+
+      if (guess === randomNumber) {
+        showMessage(`Congratulations! You guessed the number in ${attempts} attempts.`);
+        guessInput.disabled = true;
+      } else if (guess < randomNumber) {
+        showMessage("Too low! Guess higher.");
+      } else {
+        showMessage("Too high! Guess lower.");
+      }
+
+      guessInput.value = "";
+      guessInput.focus();
+    }
+
+    function showMessage(text) {
+      const message = document.getElementById("message");
+      message.textContent = text;
+    }
+  </script>
+</body>
+</html>
